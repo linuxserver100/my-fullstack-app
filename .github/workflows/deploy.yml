@@ -40,7 +40,6 @@ jobs:
           chmod 600 private_key
           ssh -o StrictHostKeyChecking=no -i private_key ubuntu@3.238.189.168 "
             cd /var/www/my-fullstack-app/ &&
-            git pull origin main &&
             cd frontend && 
             git config --global --add safe.directory /var/www/my-fullstack-app &&
             sudo git init
