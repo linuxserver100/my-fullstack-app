@@ -38,8 +38,8 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key user@your_server_ip "
-            cd /path/to/your/deployment/directory &&
+          ssh -o StrictHostKeyChecking=no -i private_key ubuntu@3.238.189.168 "
+            cd /var/www/my-fullstack-app/ &&
             git pull origin main &&
             cd frontend &&
             npm install &&
