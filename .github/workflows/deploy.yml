@@ -43,10 +43,10 @@ jobs:
             cd frontend && 
             git config --global --add safe.directory /var/www/my-fullstack-app &&
             sudo git init
-            npm install &&
-            npm run build &&
+            sudo npm install &&
+            sudo npm run build &&
             cd ../backend &&
-            npm install &&
-            npm i pm2 -g &&
-            pm2 restart all || pm2 start index.js
+            sudo npm install &&
+            sudo npm i pm2 -g &&
+            sudo  pm2 restart all || pm2 start index.js
           "
