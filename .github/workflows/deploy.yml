@@ -42,9 +42,11 @@ jobs:
             cd /var/www/my-fullstack-app/ &&
             git pull origin main &&
             cd frontend &&
+            sudo git init
             npm install &&
             npm run build &&
             cd ../backend &&
             npm install &&
+            npm i pm2 -g &&
             pm2 restart all || pm2 start index.js
           "
