@@ -1,0 +1,50 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main  # Change to your main branch if different
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Use your desired Node version
+
+      - name: Install Dependencies (Frontend)
+        run: |
+          cd frontend
+          npm install
+
+      - name: Build Frontend
+        run: |
+          cd frontend
+          npm run build
+
+      - name: Install Dependencies (Backend)
+        run: |
+          cd backend
+          npm install
+
+      - name: Deploy to Server
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          echo "$SSH_PRIVATE_KEY" > private_key
+          chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key user@your_server_ip "
+            cd /path/to/your/deployment/directory &&
+            git pull origin main &&
+            cd frontend &&
+            npm install &&
+            npm run build &&
+            cd ../backend &&
+            npm install &&
+            pm2 restart all || pm2 start index.js
+          "
