@@ -41,7 +41,8 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i private_key ubuntu@3.238.189.168 "
             cd /var/www/my-fullstack-app/ &&
             git pull origin main &&
-            cd frontend &&
+            cd frontend && 
+            git config --global --add safe.directory /var/www/my-fullstack-app &&
             sudo git init
             npm install &&
             npm run build &&
